@@ -1,23 +1,24 @@
-# Initialize an empty list called checklist
+import os
+
 checklist = []
 
 # List of functions:
 
-# CREATE
+# Create function
 def create(item):
     if not item:
         print("Error: Item cannot be empty.")
         return
     checklist.append(item)
 
-# READ
+# Read function
 def read(index):
     try:
         return checklist[index]
     except IndexError:
         return "Error: Invalid index."
 
-# UPDATE
+# Update function
 def update(index, item):
     try:
         if not item:
@@ -27,7 +28,7 @@ def update(index, item):
     except IndexError:
         print("Error: Invalid index.")
 
-# DESTROY
+# Destroy function
 def destroy(index):
     try:
         checklist.pop(index)
@@ -55,6 +56,10 @@ def mark_completed(index):
 # User input function
 def user_input(prompt):
     return input(prompt)
+
+# function to clear the terminal screen
+def clear_screen():
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 # Function to receive input from user
 def select(function_code):
@@ -104,5 +109,6 @@ test()
 # Entire program loop
 running = True
 while running:
+    clear_screen()
     selection = user_input("Press C to add to list, R to read from list, P to display the list, and Q to quit: ")
     running = select(selection)
