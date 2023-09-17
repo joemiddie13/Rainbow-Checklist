@@ -57,6 +57,13 @@ def mark_completed(index):
 def user_input(prompt):
     return input(prompt)
 
+# function to un-check a checked item in the list
+def unmark_completed(index):
+    if checklist[index].startswith("√"):
+        checklist[index] = checklist[index][2:]
+    else:
+        print("The item is already unmarked.")
+
 # function to clear the terminal screen
 def clear_screen():
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -109,6 +116,6 @@ test()
 # Entire program loop
 running = True
 while running:
-    clear_screen()
     selection = user_input("Press C to add to list, R to read from list, P to display the list, and Q to quit: ")
+    clear_screen()
     running = select(selection)
