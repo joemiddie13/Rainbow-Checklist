@@ -5,23 +5,41 @@ checklist = []
 
 # CREATE
 def create(item):
+    if not item:
+        print("Error: Item cannot be empty.")
+        return
     checklist.append(item)
 
 # READ
 def read(index):
-    return checklist[index]
+    try:
+        return checklist[index]
+    except IndexError:
+        return "Error: Invalid index."
 
 # UPDATE
 def update(index, item):
-    checklist[index] = item
+    try:
+        if not item:
+            print("Error: Item cannot be empty.")
+            return
+        checklist[index] = item
+    except IndexError:
+        print("Error: Invalid index.")
 
 # DESTROY
 def destroy(index):
-    checklist.pop(index)
+    try:
+        checklist.pop(index)
+    except IndexError:
+        print("Error: Invalid index.")
 
 # List all items along with their index
 
 def list_all_items():
+    if not checklist:
+        print("The list is empty.")
+        return
     index = 0
     for list_item in checklist:
         print(f"{index} {list_item}")
@@ -29,7 +47,10 @@ def list_all_items():
 
 # mark_completed
 def mark_completed(index):
-    checklist[index] = f"√ {checklist[index]}"
+    try:
+        checklist[index] = f"√ {checklist[index]}"
+    except IndexError:
+        print("Error: Invalid index.")
 
 # User input function
 def user_input(prompt):
@@ -37,8 +58,9 @@ def user_input(prompt):
 
 # Function to receive input from user
 def select(function_code):
+    function_code = function_code.upper()
     if function_code == "C":
-        create (input("Enter the item: "))
+        create(input("Enter the item: "))
     elif function_code == "R":
         index = int(input("Which index to read? "))
         print(read(index))
